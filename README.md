@@ -1,10 +1,28 @@
-# HMCTS Dev Test Backend
-This will be the backend for the brand new HMCTS case management system. As a potential candidate we are leaving
-this in your hands. Please refer to the brief for the complete list of tasks! Complete as much as you can and be
-as creative as you want.
+# HMCTS Task Management System
 
-You should be able to run `./gradlew build` to start with to ensure it builds successfully. Then from that you
-can run the service in IntelliJ (or your IDE of choice) or however you normally would.
+A RESTful API and application for HMCTS caseworkers to keep track of their tasks.
 
-There is an example endpoint provided to retrieve an example of a case. You are free to add/remove fields as you
-wish.
+## Features
+
+- Create, view, update, and delete tasks
+- Track task status
+- Set due dates for tasks
+- User-friendly interface (frontend)
+
+## Technologies Used
+
+### Backend
+- Java 17
+- Spring Boot 3.4.4
+- Spring Data JPA
+- H2 Database (in-memory)
+- JUnit 5 & Mockito for testing
+
+### Frontend
+- work in progress
+
+## Getting Started
+
+### Prerequisites
+- Java 17 or higher
+- Gradle
