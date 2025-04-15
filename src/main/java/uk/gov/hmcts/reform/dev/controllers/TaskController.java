@@ -121,7 +121,7 @@ public class TaskController {
      * @param statusUpdate Status update object containing new status
      * @return Updated task if found, 404 otherwise
      */
-    @PatchMapping("/{id}/status")
+    @PutMapping("/{id}/status")
     public ResponseEntity<Task> updateTaskStatus(@PathVariable Long id, @RequestBody Map<String, String> statusUpdate) {
         try {
             String status = statusUpdate.get("status");

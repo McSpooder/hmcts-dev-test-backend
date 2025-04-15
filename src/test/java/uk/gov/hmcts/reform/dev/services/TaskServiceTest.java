@@ -10,12 +10,15 @@ import uk.gov.hmcts.reform.dev.models.Task;
 import uk.gov.hmcts.reform.dev.repositories.TaskRepository;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -32,10 +35,15 @@ public class TaskServiceTest {
 
     @BeforeEach
     void setUp() {
-        task1 = new Task("Task 1", "Description 1", "PENDING", LocalDateTime.now().plusDays(1));
+        LocalDateTime localDateTime = LocalDateTime.now().plusDays(1);
+        OffsetDateTime offsetDateTime = localDateTime.atOffset(ZoneOffset.UTC);
+
+        task1 = new Task("Task 1", "Description 1", "PENDING", offsetDateTime);
         task1.setId(1L);
 
-        task2 = new Task("Task 2", "Description 2", "IN_PROGRESS", LocalDateTime.now().plusDays(2));
+        localDateTime = LocalDateTime.now().plusDays(2);
+        offsetDateTime = localDateTime.atOffset(ZoneOffset.UTC);
+        task2 = new Task("Task 2", "Description 2", "IN_PROGRESS", offsetDateTime);
         task2.setId(2L);
     }
 

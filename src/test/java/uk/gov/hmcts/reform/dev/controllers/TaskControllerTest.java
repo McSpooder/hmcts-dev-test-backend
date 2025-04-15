@@ -11,6 +11,8 @@ import uk.gov.hmcts.reform.dev.models.Task;
 import uk.gov.hmcts.reform.dev.services.TaskService;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -38,9 +40,14 @@ public class TaskControllerTest {
     @Test
     void getAllTasks_ShouldReturnAllTasks() throws Exception {
         // Arrange
-        Task task1 = new Task("Task 1", "Description 1", "PENDING", LocalDateTime.now().plusDays(1));
+        LocalDateTime localDateTime = LocalDateTime.now().plusDays(1);
+        OffsetDateTime offsetDateTime = localDateTime.atOffset(ZoneOffset.UTC);
+        LocalDateTime localDateTime2 = LocalDateTime.now().plusDays(2);
+        OffsetDateTime offsetDateTime2 = localDateTime2.atOffset(ZoneOffset.UTC);
+
+        Task task1 = new Task("Task 1", "Description 1", "PENDING", offsetDateTime);
         task1.setId(1L);
-        Task task2 = new Task("Task 2", "Description 2", "IN_PROGRESS", LocalDateTime.now().plusDays(2));
+        Task task2 = new Task("Task 2", "Description 2", "IN_PROGRESS", offsetDateTime2);
         task2.setId(2L);
         
         when(taskService.getAllTasks()).thenReturn(Arrays.asList(task1, task2));
@@ -57,7 +64,9 @@ public class TaskControllerTest {
     @Test
     void getTaskById_WhenTaskExists_ShouldReturnTask() throws Exception {
         // Arrange
-        Task task = new Task("Task 1", "Description 1", "PENDING", LocalDateTime.now().plusDays(1));
+        LocalDateTime localDateTime = LocalDateTime.now().plusDays(1);
+        OffsetDateTime offsetDateTime = localDateTime.atOffset(ZoneOffset.UTC);
+        Task task = new Task("Task 1", "Description 1", "PENDING", offsetDateTime);
         task.setId(1L);
         
         when(taskService.getTaskById(1L)).thenReturn(task);
@@ -72,7 +81,9 @@ public class TaskControllerTest {
     @Test
     void createTask_WithValidData_ShouldReturnCreatedTask() throws Exception {
         // Arrange
-        Task task = new Task("New Task", "New Description", "TODO", LocalDateTime.now().plusDays(3));
+        LocalDateTime localDateTime = LocalDateTime.now().plusDays(3);
+        OffsetDateTime offsetDateTime = localDateTime.atOffset(ZoneOffset.UTC);
+        Task task = new Task("New Task", "New Description", "TODO", offsetDateTime);
         task.setId(1L);
         
         when(taskService.createTask(any(Task.class))).thenReturn(task);
@@ -89,7 +100,9 @@ public class TaskControllerTest {
     @Test
     void updateTaskStatus_WithValidStatus_ShouldReturnUpdatedTask() throws Exception {
         // Arrange
-        Task task = new Task("Task 1", "Description 1", "DONE", LocalDateTime.now().plusDays(1));
+        LocalDateTime localDateTime = LocalDateTime.now().plusDays(1);
+        OffsetDateTime offsetDateTime = localDateTime.atOffset(ZoneOffset.UTC);
+        Task task = new Task("Task 1", "Description 1", "DONE", offsetDateTime);
         task.setId(1L);
         
         Map<String, String> statusUpdate = new HashMap<>();

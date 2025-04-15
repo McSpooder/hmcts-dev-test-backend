@@ -1,7 +1,7 @@
 package uk.gov.hmcts.reform.dev.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 /**
  * Task entity for caseworker task management.
@@ -16,8 +16,8 @@ public class Task {
     
     private String status;
     
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss", shape = JsonFormat.Shape.STRING)
-    private LocalDateTime dueDate;
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX", shape = JsonFormat.Shape.STRING)
+    private OffsetDateTime dueDate;
     
     /**
      * Default constructor.
@@ -33,7 +33,7 @@ public class Task {
      * @param status Current status of the task
      * @param dueDate Due date for task completion
      */
-    public Task(String title, String description, String status, LocalDateTime dueDate) {
+    public Task(String title, String description, String status, OffsetDateTime dueDate) {
         this.title = title;
         this.description = description;
         this.status = status;
@@ -117,7 +117,7 @@ public class Task {
      *
      * @return Task due date
      */
-    public LocalDateTime getDueDate() {
+    public OffsetDateTime getDueDate() {
         return dueDate;
     }
     
@@ -126,7 +126,7 @@ public class Task {
      *
      * @param dueDate Task due date
      */
-    public void setDueDate(LocalDateTime dueDate) {
+    public void setDueDate(OffsetDateTime dueDate) {
         this.dueDate = dueDate;
     }
 }
