@@ -88,7 +88,9 @@ public class TaskServiceTest {
     @Test
     void createTask_ShouldSaveAndReturnTask() {
         // Arrange
-        Task newTask = new Task("New Task", "New Description", "TODO", LocalDateTime.now().plusDays(3));
+        LocalDateTime localDateTime = LocalDateTime.now().plusDays(3);
+        OffsetDateTime offsetDateTime = localDateTime.atOffset(ZoneOffset.UTC);
+        Task newTask = new Task("New Task", "New Description", "TODO", offsetDateTime);
         when(taskRepository.save(any(Task.class))).thenReturn(newTask);
 
         // Act
